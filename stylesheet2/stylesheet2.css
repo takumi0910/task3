@@ -1,0 +1,104 @@
+body {
+  height: 1000px;
+  margin: 0;
+  font-family: "Osaka";
+}
+
+.header {
+  height: 80px;
+  width: 100%;
+  background-color: #ff9696;
+}
+
+.header h1 {
+  margin: 0;
+  padding: 21px 0 0 40px;
+  color: white;
+  font-size: 28px;
+}
+
+.main {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.main h2 {
+  display: inline-block;
+  margin: 57px 118px 0;
+  text-align: center;
+  font-size: 44px;
+  font-weight: normal;
+}
+
+.main .form-wrapper {
+  margin-top: 60px;
+}
+
+.main .form-wrapper .form-content {
+  margin-top: 39px;
+}
+
+.main .form-wrapper .form-content .form-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 0 20px 0;
+}
+
+.main .form-wrapper .form-content input {
+  margin-top: 12px;
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #BABABA;
+}
+
+.main .form-wrapper .form-content .form-item {
+  margin: 0 10px 0 0;
+}
+
+.main .form-wrapper .form-content .attention {
+  background-color: #ff9696;
+  color: white;
+  width: 54px;
+  height: 25px;
+  text-align: center;
+}
+
+.main .form-wrapper .form-content .random {
+  background-color: #96dbff;
+  color: white;
+  width: 54px;
+  height: 25px;
+  text-align: center;
+}
+
+.main .form-wrapper .form-content .personal {
+  padding: 0 0 20px;
+  border-bottom: solid 1px #707070;
+}
+
+.main .form-wrapper .form-content textarea {
+  margin-top: 12px;
+  width: 100%;
+  height: 150px;
+  border-radius: 5px;
+  border: 1px solid #BABABA;
+}
+
+.main .form-wrapper .form-content .form-item {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: normal;
+}
+
+.main .btn {
+  margin: 60px 0 0;
+  width: 100%;
+  height: 50px;
+  background-color: #ff9696;
+  border: none;
+  color: white;
+  font-size: 18px;
+}
+/*# sourceMappingURL=stylesheet2.css.map */
