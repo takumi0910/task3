@@ -1,3 +1,22 @@
+<?php
+session_start();
+
+//クリックジャッキング対策(同一オリジン以外のページ表示の禁止)
+header('X-FRAME-OPTIONS: SAMEORIGIN');
+
+// HTML特殊文字をエスケープする関数(入力フォームに他有害サイトのリンク等の貼り付けを防ぐ)
+function escape($str)
+{
+    return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
+}
+
+// トークン生成
+$_SESSION['token'] = sha1(random_bytes(30));
+
+$token = $_SESSION['token'];
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -8,26 +27,16 @@
 </head>
 
 <body>
-
-    <div class="randam">
-        <?php
-        $random = rand();
-        echo  $random;
-        ?>
-    </div>
-
     <div class="container">
         <div class="header">
             <h1>Demo App</h1>
         </div>
-
         <div class="main">
             <div class="contact-form">
                 <h2 class="form-title">
                     お問い合わせ
                 </h2>
                 <form method="post" action="./confirm.php">
-                    <input value="$random" name="random">
                     <div class="form-wrapper">
                         <div class="form-content">
                             <div class="form-row">
@@ -41,7 +50,7 @@
                                 <div class="form-item">メールアドレス</div>
                                 <div class="attention">必須</div>
                             </div>
-                            <input type="text" name="mail">
+                            <input type="text" name="mailadress">
                         </div>
                         <div class="form-content">
                             <div class="form-row">
@@ -56,7 +65,10 @@
                                 <div class="form-item">お問い合わせ内容</div>
                                 <div class="attention">必須</div>
                             </div>
-                            <textarea name="content"></textarea>
+                            <textarea name="content" cols="60"></textarea>
+                        </div>
+                        <div>
+                            <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
                         </div>
                     </div>
 
