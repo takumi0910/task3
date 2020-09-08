@@ -12,8 +12,8 @@ function escape($str)
 
 $token = $_POST['token'];
 
-// トークンを確認し、確認画面を表示
-if(!(hash_equals($token, $_SESSION['token']) && !empty($token))) {
+// トークンを確認し、確認画面を表示(トークンが一致せず、トークンが空ではない場合に追い出す)
+if (!(hash_equals($token, $_SESSION['token']) && !empty($token))) {
   echo "不正アクセスの可能性があります";
   exit();
 }
@@ -56,11 +56,10 @@ try {
   $number =  $_SESSION['number'];
   $content =  $_SESSION['content'];
 
-  $mail->Body = 'お問い合わせ内容：'."\n".$content."\n"."\n".'名前：'.$name."\n".'電話番号:'.$number."\n".'メールアドレス:'.$mailadress;
+  $mail->Body = 'お問い合わせ内容：' . "\n" . $content . "\n" . "\n" . '名前：' . $name . "\n" . '電話番号:' . $number . "\n" . 'メールアドレス:' . $mailadress;
   $mail->Subject = "お問い合わせ";
 
   $mail->send();
-  header("Location: http://localhost:81/submit/send.html");
 } catch (Exception $e) {
   $error = $e;
   echo $mail->ErrorInfo;
@@ -69,19 +68,44 @@ try {
 if ($error != null) {
   echo "send";
 }
+
+$_SESSION[ 'name' ] = NULL;
+$_SESSION[ 'mailadress' ] = NULL;
+$_SESSION[ 'number' ] = NULL;
+$_SESSION[ 'content' ] = NULL;
+
 ?>
 
+
 <!DOCTYPE html>
-<html lang="ja">
+<html>
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <meta charset="utf-8">
+  <title>送信完了</title>
+  <link rel="stylesheet" type="text/css" href="../stylesheet3/stylesheet3.css">
 </head>
+
 <body>
-<form method="post" action="./send.html">
-<input type="hidden" name="token" value= <?php echo escape($token); ?>>
-<input type= "submit">
-</post>
+  <div class="container">
+    <div class="header">
+      <h1>Demo App</h1>
+    </div>
+
+    <div class="main">
+      <div class="contact-form">
+        <h2 class="form-title">
+          送信完了
+        </h2>
+        <div class="thankyou">
+          お問い合わせいただきありがとうございます。
+        </div>
+        <input type="button" class="btn" value="トップへ戻る" onclick="location.href='http://localhost:81/submit4/contact.php'">
+      </div>
+    </div>
+
+
+  </div>
 </body>
+
 </html>

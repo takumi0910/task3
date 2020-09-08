@@ -21,41 +21,41 @@ if (!(hash_equals($token, $_SESSION['token']) && !empty($token))) {
 $token = $_SESSION['token'];
 
 //変数に代入をしている
-$name =  $_POST['name'];
-$mailadress =  $_POST['mailadress'];
-$number = $_POST['number'];
-$content = $_POST['content'];
+$name = isset($_POST['name']) ? $_POST['name'] : NULL;
+$mailadress = isset($_POST['mailadress']) ? $_POST['mailadress'] : NULL;
+$number = isset($_POST['number']) ? $_POST['number'] : NULL;
+$content = isset($_POST['content']) ? $_POST['content'] : NULL;
 
-//入力判定
-if (empty($_POST['name'])) {
-    $name = "名前が入力されていません。";
-} else {
-    $name = $_POST['name'];
+//エラーメッセージを保存する配列の初期化
+$error = array();
+
+//値の検証（入力内容が条件を満たさない場合はエラーメッセージを配列 $error に設定）
+if ($name == '') {
+    $error['name'] = '※お名前は必須項目です。';
 }
 
-if (empty($_POST['number'])) {
-    $number = "電話番号が入力されていません。";
-} else {
-    $number = $_POST['number'];
+if ($mailadress == '') {
+    $error['mailadress'] = '※メールアドレスは必須項目です。';
 }
 
-if (empty($_POST['mailadress'])) {
-    $mailadress = "メールが入力されていません。";
-} else {
-    $mailadress = $_POST['mailadress'];
+
+if ($content == '') {
+    $error['content'] = '※お問い合わせ内容をご記入ください。';
 }
 
-if (empty($_POST['content'])) {
-    $content = "お問い合わせ内容が入力されていません。";
-} else {
-    $content = $_POST['content'];
-}
 
-//エラーが無ければセッションに登録
+//セッションに登録
 $_SESSION['name'] = $name;
 $_SESSION['mailadress'] = $mailadress;
 $_SESSION['number'] = $number;
 $_SESSION['content'] = $content;
+$_SESSION['error'] = $error;
+
+
+//チェックの結果にエラーがある場合は入力フォームに戻す
+if (count($error) > 0) {
+    header("Location: http://localhost:81/submit4/contact.php");
+}
 
 ?>
 
@@ -80,7 +80,7 @@ $_SESSION['content'] = $content;
                 <h2 class="form-title">
                     内容確認
                 </h2>
-                <form method="post" action="./phpmail/sender.php" 　action="./send.html">
+                <form method="post" action="./phpmail/sender.php">
                     <div class="form-wrapper">
                         <div class="form-content">
                             <div class="form-row">
@@ -88,6 +88,7 @@ $_SESSION['content'] = $content;
                                 <div class="attention">必須</div>
                             </div>
                             <div class="personal">
+                            
                                 <?php echo escape($name); ?>
                             </div>
                         </div>
@@ -121,8 +122,8 @@ $_SESSION['content'] = $content;
                             </div>
                         </div>
                     </div>
-                    <input type="submit" class="btn" value="上記の内容で送信する">
                     </post>
+                    <input type="submit" class="btn" value="上記の内容で送信する">
             </div>
         </div>
 

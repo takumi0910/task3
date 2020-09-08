@@ -2,13 +2,6 @@
 session_start();
 
 $token = $_POST['token'];
-
-if(!(hash_equals($token, $_SESSION['token']) && !empty($token))) {
-  echo "不正アクセスの可能性があります";
-  exit();
-}
-
-
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +28,7 @@ if(!(hash_equals($token, $_SESSION['token']) && !empty($token))) {
                     お問い合わせいただきありがとうございます。
                 </div>
                 <input type="button" class="btn" value="トップへ戻る"
-                    onclick="location.href='http://localhost:81/submit/contact.php'">
+                    onclick="location.href='http://localhost:81/submit4/contact.php'">
             </div>
         </div>
 

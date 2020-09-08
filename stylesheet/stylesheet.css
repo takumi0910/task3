@@ -48,6 +48,11 @@ body {
   display: flex;
 }
 
+.main .form-wrapper .form-content span {
+  color: red;
+  margin-left: 5px;
+}
+
 .main .form-wrapper .form-content input {
   margin-top: 12px;
   width: 100%;
