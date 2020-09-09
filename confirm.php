@@ -20,7 +20,7 @@ if (!(hash_equals($token, $_SESSION['token']) && !empty($token))) {
 
 $token = $_SESSION['token'];
 
-//変数に代入をしている
+//変数に代入をしている(値が入っていない場合は要素をなくす)
 $name = isset($_POST['name']) ? $_POST['name'] : NULL;
 $mailadress = isset($_POST['mailadress']) ? $_POST['mailadress'] : NULL;
 $number = isset($_POST['number']) ? $_POST['number'] : NULL;
@@ -29,15 +29,20 @@ $content = isset($_POST['content']) ? $_POST['content'] : NULL;
 //エラーメッセージを保存する配列の初期化
 $error = array();
 
-//値の検証（入力内容が条件を満たさない場合はエラーメッセージを配列 $error に設定）
+//値の検証（入力内容が条件を満たさない場合はエラーメッセージを配列$errorとして設定）
 if ($name == '') {
     $error['name'] = '※お名前は必須項目です。';
 }
 
 if ($mailadress == '') {
     $error['mailadress'] = '※メールアドレスは必須項目です。';
+} else {
+    //メールアドレスの形式確認(正規表現を用いて確認)
+    $pattern = "/^[a-z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)*$/";
+    if ( !preg_match( $pattern, $mailadress ) ) {
+        $error['mailadress'] = '※メールアドレスの形式が正しくありません。';
+      }
 }
-
 
 if ($content == '') {
     $error['content'] = '※お問い合わせ内容をご記入ください。';

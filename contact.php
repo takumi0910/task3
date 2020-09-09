@@ -15,11 +15,13 @@ $_SESSION['token'] = sha1(random_bytes(30));
 
 $token = $_SESSION['token'];
 
+//変数に代入をしている(値が入っていない場合は要素をなくす)
 $name = isset( $_SESSION[ 'name' ] ) ? $_SESSION[ 'name' ] : NULL;
 $mailadress = isset( $_SESSION[ 'mailadress' ] ) ? $_SESSION[ 'mailadress' ] : NULL;
 $number = isset( $_SESSION[ 'number' ] ) ? $_SESSION[ 'number' ] : NULL;
 $content = isset( $_SESSION[ 'content' ] ) ? $_SESSION[ 'content' ] : NULL;
 
+//エラーを変数に代入をしている(値が入っていない場合は要素をなくす)
 $error = isset($_SESSION['error']) ? $_SESSION['error'] : NULL;
 $error_name = isset($error['name']) ? $error['name'] : NULL;
 $error_mailadress = isset($error['mailadress']) ? $error['mailadress'] : NULL;
@@ -54,7 +56,7 @@ $error_content = isset($error['content']) ? $error['content'] : NULL;
                                 <div class="attention">必須</div>
                                 <span class="error1"><?php echo $error_name; ?></span>
                             </div>
-                            <input type="text" name="name" value="<?php echo ($name); ?>">
+                            <input type="text" name="name" value="<?php echo escape($name); ?>">
                         </div>
                         <div class="form-content">
                             <div class="form-row">
@@ -62,14 +64,14 @@ $error_content = isset($error['content']) ? $error['content'] : NULL;
                                 <div class="attention">必須</div>
                                 <span class="error2"><?php echo $error_mailadress; ?></span>
                             </div>
-                            <input type="text" name="mailadress" value="<?php echo ($mailadress); ?>">
+                            <input type="text" name="mailadress" value="<?php echo escape($mailadress); ?>">
                         </div>
                         <div class="form-content">
                             <div class="form-row">
                                 <div class="form-item">電話番号</div>
                                 <div class="random">任意</div>
                             </div>
-                            <input type="text" name="number" value="<?php echo ($number); ?>">
+                            <input type="text" name="number" value="<?php echo escape($number); ?>">
                         </div>
 
                         <div class="form-content">
@@ -78,7 +80,7 @@ $error_content = isset($error['content']) ? $error['content'] : NULL;
                                 <div class="attention">必須</div>
                                 <span class="error2"><?php echo $error_content; ?></span>
                             </div>
-                            <textarea name="content" cols="60"><?php echo ($content); ?></textarea>
+                            <textarea name="content" cols="60"><?php echo escape($content); ?></textarea>
                         </div>
                         <div>
                             <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">

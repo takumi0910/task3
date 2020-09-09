@@ -2,6 +2,12 @@
 session_start();
 
 $token = $_POST['token'];
+
+// トークンを確認し、確認画面を表示(トークンが一致せず、トークンが空ではない場合に追い出す)
+if (!(hash_equals($token, $_SESSION['token']) && !empty($token))) {
+  echo "不正アクセスの可能性があります";
+  exit();
+}
 ?>
 
 <!DOCTYPE html>
